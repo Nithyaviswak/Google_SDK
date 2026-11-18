@@ -1,0 +1,21 @@
+{
+  "name": "gemini-toolbox",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A small web app that chats with Gemini and shows its tool calls.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "metrics": "node scripts/metrics.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@google/genai": "^3.6.0",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0"
+  }
+}

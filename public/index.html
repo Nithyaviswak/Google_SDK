@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Toolbox — Gemini tool calling demo</title>
+    <meta
+      name="description"
+      content="A small chat app built with the Gemini SDK that shows every tool call as it happens."
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+              <path d="M13.5 3.5 6 13h5l-1.5 7.5L18 10h-5l.5-6.5Z" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div>
+            <p class="brand-name">Toolbox</p>
+            <p class="brand-sub">Gemini SDK demo</p>
+          </div>
+        </div>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Tools</h2>
+            <span class="pill" id="tool-count">6</span>
+          </div>
+          <ul class="tool-list" id="tool-list" aria-label="Available tools">
+            <li class="tool-skeleton"></li>
+            <li class="tool-skeleton"></li>
+            <li class="tool-skeleton"></li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Try asking</h2>
+          </div>
+          <ul class="suggestions" id="suggestions">
+            <li><button type="button">What time is it in Tokyo right now?</button></li>
+            <li><button type="button">What is 18% of 2,480, then divided by 7?</button></li>
+            <li><button type="button">Compare the weather in Reykjavik and Lisbon.</button></li>
+            <li><button type="button">Search the docs for how function calling works, then save a note with the three key steps.</button></li>
+          </ul>
+        </section>
+
+        <footer class="sidebar-footer">
+          <p>Built with <code>@google/genai</code></p>
+          <p class="muted">Tool results are generated locally. Weather is simulated.</p>
+        </footer>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="topbar-title">
+            <span class="dot" id="status-dot" aria-hidden="true"></span>
+            <span class="muted" id="status-text">Connecting…</span>
+          </div>
+          <div class="topbar-actions">
+            <span class="pill pill-model" id="model-badge">gemini</span>
+            <button class="ghost-button" id="reset-button" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M4 12a8 8 0 1 0 2.6-5.9M4 4v4h4" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              New chat
+            </button>
+          </div>
+        </header>
+
+        <div class="notice" id="notice" hidden>
+          <strong>No API key found.</strong>
+          <span>
+            Add <code>GEMINI_API_KEY</code> to <code>.env</code>, restart the server,
+            then reload this page.
+          </span>
+        </div>
+
+        <div class="chat" id="chat" role="log" aria-live="polite" aria-relevant="additions">
+          <section class="welcome" id="welcome">
+            <div class="welcome-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M13.5 3.5 6 13h5l-1.5 7.5L18 10h-5l.5-6.5Z" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <h1>Ask something that needs a tool.</h1>
+            <p>
+              This chat runs on the Gemini API. When the model needs a fact or a
+              calculation it calls a local function, and you can watch every call
+              happen below.
+            </p>
+            <div class="welcome-chips">
+              <span class="chip">clock</span>
+              <span class="chip">calculator</span>
+              <span class="chip">weather</span>
+              <span class="chip">docs search</span>
+              <span class="chip">notes</span>
+            </div>
+          </section>
+        </div>
+
+        <div class="composer-wrap">
+          <form class="composer" id="composer">
+            <textarea
+              id="input"
+              rows="1"
+              placeholder="Message Toolbox…"
+              aria-label="Message"
+              autocomplete="off"
+              maxlength="4000"
+            ></textarea>
+            <button class="send" id="send-button" type="submit" aria-label="Send message">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+                <path d="M5 12h13M12.5 5.5 19 12l-6.5 6.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </form>
+          <p class="composer-hint">
+            <kbd>Enter</kbd> to send · <kbd>Shift</kbd> + <kbd>Enter</kbd> for a new line
+          </p>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
